@@ -3,18 +3,23 @@ require('styles/main.scss');
 /* js */
 import { log, logTitle } from 'logger';
 /* your imports */
-logTitle('Lexical this');
+logTitle('Enhanced Object Properties');
 /* coding examples */
 
-const person = {
-  name: 'Alex',
-  cars: ['ferrari', 'lambo'],
-  toString: function() {
-    // log(`${this.name} has a ${this.cars}`)
-    this.cars.forEach(car => {
-      log(`${this.name} has ${car}`);
-    })
+const pricePropName = "PRICE";
+
+const calc = (name, price) => {
+  return {
+     name,
+     add(n1,n2) {
+       return n1 + n2;
+     },
+     [pricePropName.toLowerCase()] : price
   }
 }
 
-person.toString();
+const cal = calc('casio', 19.99);
+
+log(cal.name);
+log(cal.add(30,20));
+log(cal.price);
