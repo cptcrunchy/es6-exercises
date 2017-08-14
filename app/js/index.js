@@ -3,23 +3,17 @@ require('styles/main.scss');
 /* js */
 import { log, logTitle } from 'logger';
 /* your imports */
-logTitle('Enhanced Object Properties');
+logTitle('Array Destructuring');
 /* coding examples */
 
-const pricePropName = "PRICE";
+const names = ['Anna', 'Mariam', 'Joe', 'Mark', 'Matt'];
 
-const calc = (name, price) => {
-  return {
-     name,
-     add(n1,n2) {
-       return n1 + n2;
-     },
-     [pricePropName.toLowerCase()] : price
-  }
-}
+// const anna = names[0];
+// const mariam = names[1];
+// const joe = names[2];
 
-const cal = calc('casio', 19.99);
+const [a,m,j, ...restOfNames] = names;
 
-log(cal.name);
-log(cal.add(30,20));
-log(cal.price);
+log(`${a} ${m} ${j}`);
+log(restOfNames);
+
