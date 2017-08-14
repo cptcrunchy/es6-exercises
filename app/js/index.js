@@ -4,19 +4,34 @@ require('styles/main.scss');
 import $ from 'jquery';
 import { log, logTitle } from 'logger';
 /* your imports */
-logTitle('ECMAScript 2015');
+logTitle('Arrow Functions');
 /* coding examples */
-const address = {
-  city: 'SA',
-  country: 'USA',
-  postCode: 'SATX'
-};
 
-const name = {
-  firstName: 'Jason',
-  lastName: 'Gutierrez'
-};
+//  const hello = function() {
+//   const es6 = 'ES6';
+//   return `Hello ${es6}`;
+// };
+const hello = () => {
+  const es6 = 'ES6';
+  return `Hello ${es6}`;
+}
 
-const person = {...address, ...name};
+// const powers = [1,2,3,4,5].map(function(number, index) {
+//   return Math.pow(number, index);
+// });
+const powers = [1,2,3,4,5].map( (number, index) => Math.pow(number,index) );
 
-log(JSON.stringify(person, null, 2));
+// const add = function(n1, n2) {
+//   return n1 + n2;
+// };
+const add = (n1,n2) => n1 + n2;
+
+// const milesToKm = function(miles) {
+//   return miles * 1.60934;
+// };
+const milesToKm = miles => `${miles * 1.60} km`;
+
+log(hello());
+log(powers);
+log(add(100,100));
+log(milesToKm(100));
