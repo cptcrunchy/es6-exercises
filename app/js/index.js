@@ -3,13 +3,45 @@ require('styles/main.scss');
 /* js */
 import { log, logTitle } from 'logger';
 /* your imports */
-logTitle('Function Default Parameters');
+logTitle('ES6 Classes');
 /* coding examples */
-const calculatePay = (yearSalary, bonus = {
-  teamBonus: 0,
-  employeeBonus: 0
-}) => {
-  return yearSalary + bonus.teamBonus + bonus.employeeBonus;
+
+class Animal {
+  constructor(name, age) {
+    log(`${name} is an animal and was created`);
+    this.name = name;
+    this.age = age;
+  }
+
+  eat() {
+    log(`${this.name} is eating`);
+  }
+
+  sleep(){
+    log(`${this.name} is sleeping`);
+  }
+
+  wakeUp(){
+    log(`${this.name} is waking up`);
+  }
+
+  logAge(){
+    log(`${this.name} is ${this.age} years old`);
+  }
 }
 
-log(calculatePay(22000, {teamBonus: 10000, employeeBonus: 6000}));
+const bobby = new Animal("bobby", 2);
+bobby.eat();
+bobby.sleep();
+bobby.wakeUp();
+bobby.logAge();
+
+log('---------------');
+
+const marshall = new Animal("marshall", 3);
+marshall.eat();
+marshall.sleep();
+marshall.wakeUp();
+marshall.logAge();
+
+
