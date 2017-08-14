@@ -1,37 +1,20 @@
 /* styling */
 require('styles/main.scss');
 /* js */
-import $ from 'jquery';
 import { log, logTitle } from 'logger';
 /* your imports */
-logTitle('Arrow Functions');
+logTitle('Lexical this');
 /* coding examples */
 
-//  const hello = function() {
-//   const es6 = 'ES6';
-//   return `Hello ${es6}`;
-// };
-const hello = () => {
-  const es6 = 'ES6';
-  return `Hello ${es6}`;
+const person = {
+  name: 'Alex',
+  cars: ['ferrari', 'lambo'],
+  toString: function() {
+    // log(`${this.name} has a ${this.cars}`)
+    this.cars.forEach(car => {
+      log(`${this.name} has ${car}`);
+    })
+  }
 }
 
-// const powers = [1,2,3,4,5].map(function(number, index) {
-//   return Math.pow(number, index);
-// });
-const powers = [1,2,3,4,5].map( (number, index) => Math.pow(number,index) );
-
-// const add = function(n1, n2) {
-//   return n1 + n2;
-// };
-const add = (n1,n2) => n1 + n2;
-
-// const milesToKm = function(miles) {
-//   return miles * 1.60934;
-// };
-const milesToKm = miles => `${miles * 1.60} km`;
-
-log(hello());
-log(powers);
-log(add(100,100));
-log(milesToKm(100));
+person.toString();
