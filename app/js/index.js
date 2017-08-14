@@ -13,6 +13,10 @@ class Animal {
     this.age = age;
   }
 
+  static iAmAstaticMethod() {
+  	log('I am a static method inside of Animal class');
+	}
+
   eat() {
     log(`${this.name} is eating`);
   }
@@ -44,20 +48,20 @@ class Dog extends Animal{
 	}
 }
 
-
-const mike = new Dog("Mike", 4,"Dacshund");
-mike.logBreed();
-mike.logAgeFromDog();
-
-
-
 //
-// const bobby = new Animal("bobby", 2);
-// bobby.eat();
-// bobby.sleep();
-// bobby.wakeUp();
-// bobby.logAge();
-//
+// const mike = new Dog("Mike", 4,"Dacshund");
+// mike.logBreed();
+// mike.logAgeFromDog();
+
+
+Animal.iAmAstaticMethod();
+
+const bobby = new Animal("bobby", 2);
+bobby.eat();
+bobby.sleep();
+bobby.wakeUp();
+bobby.logAge();
+
 // log('---------------');
 //
 // const marshall = new Animal("marshall", 3);
