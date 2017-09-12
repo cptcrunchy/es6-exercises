@@ -3,36 +3,23 @@ require('styles/main.scss');
 /* js */
 import { log, logTitle } from 'logger';
 /* your imports */
-logTitle('ES6 Promises');
-/* coding examples */
+logTitle('Generators');
 
-const namesPromise = new Promise( (resolve, reject) => {
-	setTimeout( () => {
-		resolve(['jessica','jake','anna']);
-	}, 3000);
-	setTimeout( () => {
-		reject("No data back from server, error encountered");
-	}, 5000);
-
-});
-
-const surnamesPromise = new Promise( (resolve, reject) => {
-	setTimeout( () => {
-		resolve(['jones','taylor','smith']);
-	}, 3000);
-	setTimeout( () => {
-		reject("No data back from server, error encountered");
-	}, 5000);
-
-});
-
-Promise.all([namesPromise, surnamesPromise]).then(data => {
-	const [names, surnames] = data;
-	for(let i = 0; i < names.length; i++) {
-		const name = names[i];
-		const surname = surnames[i];
-		log(`${name}, ${surname}`);
+const getNumbers = function* (numbers) {
+	for (var i = 0; i < numbers.length; i++) {
+		yield numbers[i];
 	}
-}).catch(error => {
-	log(error);
-});
+}
+
+const getNumbersGen = getNumbers([1,2,3,4,5,6,7]);
+
+const interval = setInterval(() => {
+	const next = getNumbersGen.next();
+	if(next.done) {
+		log("This generator is done");
+		clearInterval(interval);
+	} else {
+		const number = next.value;
+		log(number);
+	}
+}, 1000);
