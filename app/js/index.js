@@ -2,33 +2,25 @@
 require('styles/main.scss');
 /* js */
 import { log, logTitle } from 'logger';
-import {coroutine as co} from 'bluebird';
-logTitle('Generators & Promises');
+/* your imports*/
 
-// const getRandomUsers = n => {
-//   const fetchRandomUsers = fetch(`https://randomuser.me/api/?results=${n}`)
-//   fetchRandomUsers.then(data => {
-//     data.json().then(randomUsers => {
-//       log(JSON.stringify(randomUsers.results.length));
-//       randomUsers.results.forEach(user => {
-//         const {gender, email} = user;
-//         log(`${gender} - ${email}`);
-//       });
-//     })
-//   });
-// }
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 
-// getRandomUsers(100);
+logTitle('React & ES6');
 
-const getRandomUsers = co(function* (n) {
-	const fetchRandomUsers = yield fetch(`https://randomuser.me/api/?results=${n}`)
-	const data = yield fetchRandomUsers.json();
-	return data;
-});
+class MainComponent extends Component {
+	constructor(props) {
+		super(props);
+	}
 
-getRandomUsers(10).then(randomUsers => {
-	randomUsers.results.forEach(user => {
-		const {gender, email} = user;
-		log(`${gender} - ${email}`);
-	});
-}).catch(err => log);
+	render() {
+		return (
+			<h1> Hello world</h1>
+		);
+	}
+}
+
+const mountNode = document.getElementById('mountNode');
+
+render(<MainComponent />, mountNode);
