@@ -2,24 +2,33 @@
 require('styles/main.scss');
 /* js */
 import { log, logTitle } from 'logger';
-/* your imports */
-logTitle('Generators');
+import {coroutine as co} from 'bluebird';
+logTitle('Generators & Promises');
 
-const getNumbers = function* (numbers) {
-	for (var i = 0; i < numbers.length; i++) {
-		yield numbers[i];
-	}
-}
+// const getRandomUsers = n => {
+//   const fetchRandomUsers = fetch(`https://randomuser.me/api/?results=${n}`)
+//   fetchRandomUsers.then(data => {
+//     data.json().then(randomUsers => {
+//       log(JSON.stringify(randomUsers.results.length));
+//       randomUsers.results.forEach(user => {
+//         const {gender, email} = user;
+//         log(`${gender} - ${email}`);
+//       });
+//     })
+//   });
+// }
 
-const getNumbersGen = getNumbers([1,2,3,4,5,6,7]);
+// getRandomUsers(100);
 
-const interval = setInterval(() => {
-	const next = getNumbersGen.next();
-	if(next.done) {
-		log("This generator is done");
-		clearInterval(interval);
-	} else {
-		const number = next.value;
-		log(number);
-	}
-}, 1000);
+const getRandomUsers = co(function* (n) {
+	const fetchRandomUsers = yield fetch(`https://randomuser.me/api/?results=${n}`)
+	const data = yield fetchRandomUsers.json();
+	return data;
+});
+
+getRandomUsers(10).then(randomUsers => {
+	randomUsers.results.forEach(user => {
+		const {gender, email} = user;
+		log(`${gender} - ${email}`);
+	});
+}).catch(err => log);
